@@ -70,3 +70,21 @@ Detectar obstáculos con mayor exactitud.
 Mantener referencias espaciales estables.
 Tomar decisiones basadas en datos confiables.
 La interacción entre potencia estable y percepción sensorial precisa es esencial para el correcto desempeño del sistema
+
+💻 Gestión de obstáculos
+
+La gestión de obstáculos es un componente fundamental dentro del comportamiento autónomo del robot, ya que determina su capacidad para detectar, evaluar y reaccionar ante elementos presentes en su entorno.
+Para este propósito, se emplean tres sensores ultrasónicos HC-SR04 distribuidos en posiciones izquierda, derecha y frontal, loscuales actúan como los “sentidos” principales del sistema. 
+Estos sensores envían información constante sobre las distancias respecto a posibles obstáculos, permitiendo a la lógica del sistema tomar decisiones correctivas en tiempo real.
+El robot integra un mecanismo de evitación basado en dos niveles:
+
+1. Detección y reacción inmediata ante obstáculos frontales, para
+prevenir colisiones.
+
+2. Corrección continua de rumbo mediante control proporcional,
+empleando diferencias laterales entre sensores izquierdo y
+derecho.
+
+El proceso asegura una navegación fluida y estable, combinando retrocesos controlados, redireccionamiento y ajustes dinámicos de dirección mediante el servomotor MG996R.
+Cada acción se ejecuta según las condiciones detectadas, garantizando que el vehículo pueda evadir obstáculos y mantener una trayectoria adecuada.
+
