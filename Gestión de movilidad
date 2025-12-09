@@ -1,0 +1,43 @@
+El control se realiza por medio de las señales digitales IN1 e IN2, mientras la velocidad se regula mediante PWM en el pin ENA. Esto permite variar la velocidad del vehículo según los requerimientos de la prueba.
+
+⛧ Servo para dirección (girar ruedas)
+
+Servo direccion;
+
+const int SERVO_PIN = 11;
+int SERVO_IZQ = 1600;
+int SERVO_CENTRO = 2000;
+int SERVO_DER = 2500;
+
+⛧ Configuración del servo
+
+direccion.attach(SERVO_PIN, 500, 2500);
+direccion.writeMicroseconds(SERVO_CENTRO);
+
+⛧ Giros y control de dirección en el loop
+
+direccion.writeMicroseconds(SERVO_CENTRO);
+direccion.writeMicroseconds(SERVO_IZQ);
+direccion.writeMicroseconds(SERVO_DER);
+
+Funciones utilizadas en el código:
+
+•	motorAdelante(vel) → movimiento hacia adelante
+•	motorAtras(vel) → movimiento hacia atrás
+•	motorStop() → detención total
+
+Dirección por servo
+
+El vehículo utiliza un servo ubicado en el eje delantero, encargado de ajustar el ángulo de giro. Para ello se definieron tres microsegundos representativos:
+•	SERVO_IZQ = 1600 µs
+•	SERVO_CENTRO = 2000 µs
+•	SERVO_DER = 2500 µs
+El servo permite giros precisos que ayudan al robot a corregir trayectoria o esquivar obstáculos con anticipación.
+Integración con el chasis
+El chasis permite montar:
+•	Módulo L298N
+•	Servo frontal
+•	Sensores ultrasónicos
+•	ESP32
+
+El diseño se basa en mantener el centro de gravedad estable y dejar el frente despejado para una lectura eficaz del sensor frontal.
