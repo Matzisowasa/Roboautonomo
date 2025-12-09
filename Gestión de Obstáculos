@@ -1,0 +1,75 @@
+La gestión de obstáculos es la parte más importante y compleja del proyecto. Se implementa mediante lógica condicional que analiza la distancia frontal y lateral para decidir:
+•	frenar
+•	retroceder
+•	girar
+•	retomar la trayectoria
+
+A) Obstáculo frontal
+
+Se considera un obstáculo frontal cuando distF < 10 cm.
+Pasos del vehículo:
+
+1.	Detiene motor
+2.	Centra el servo
+3.	Retrocede 1.1 s
+4.	Decide la mejor salida comparando:
+o	si izquierda > derecha → gira IZQUIERDA
+o	si derecha > izquierda → gira DERECHA
+5.	Avanza 2 segundos
+6.	Regresa al centro
+Esto evita choques directos con objetos sólidos.
+
+B) Obstáculos laterales
+
+Si cualquiera de los sensores laterales detecta menos de 20 cm:
+1.	Se detiene
+2.	Retrocede ligeramente
+3.	Elige el giro:
+o	Si izquierda < derecha → gira DERECHA
+o	Si derecha < izquierda → gira IZQUIERDA
+4.	Avanza para reincorporarse
+5.	Vuelve al centro
+
+C) Camino libre
+
+Cuando no hay obstáculos laterales ni frontales:
+
+•	Servo al centro
+•	Velocidad máxima (255)
+•	Avance continuo
+
+⛧ Pines de los sensores ultrasónicos (entradas/salidas)
+const int TRIG_I = 7;
+const int ECHO_I = 6;
+const int TRIG_D = 3;
+const int ECHO_D = 2;
+const int TRIG_F = 5;
+const int ECHO_F = 4;
+
+⛧ Configuración de pines en setup
+pinMode(TRIG_I, OUTPUT);
+pinMode(ECHO_I, INPUT);
+pinMode(TRIG_D, OUTPUT);
+pinMode(ECHO_D, INPUT);
+pinMode(TRIG_F, OUTPUT);
+pinMode(ECHO_F, INPUT);
+
+⛧Función para leer cualquier sensor ultrasónico
+float leerDistancia(int trig, int echo) {
+  digitalWrite(trig, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trig, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trig, LOW);
+
+  long duracion = pulseIn(echo, HIGH, 40000);
+  float dist = duracion * 0.034 / 2;
+
+  if (dist == 0 || dist > 300) return 300;
+  return dist;
+}
+
+⛧Lectura de sensores en el loop
+float distI = leerDistancia(TRIG_I, ECHO_I);
+float distD = leerDistancia(TRIG_D, ECHO_D);
+float distF = leerDistancia(TRIG_F, ECHO_F);
