@@ -1,0 +1,63 @@
+Este apartado explica las fuentes de energía del sistema y cómo los sensores (los “sentidos” del vehículo) brindan información vital para la navegación y toma de decisiones.
+Fuente de energía
+
+El vehículo utiliza:
+
+•	Batería Li-ion o pack 18650
+•	Regulación estable para alimentar el ESP32, servo y L298N
+•	Cables calibre adecuado para evitar caída de voltaje
+
+El consumo energético está distribuido entre:
+
+•	Servo (picos de corriente al girar)
+•	Motor DC (consume más al arrancar o retroceder)
+•	Tres sensores ultrasónicos (mínimo consumo)
+Sensores (3 ultrasónicos)
+
+Se emplean tres sensores HC-SR04:
+
+Sensor	Ubicación	Función
+TRIG_I – ECHO_I	Lado izquierdo	Detectar paredes u objetos laterales
+TRIG_D – ECHO_D	Lado derecho	Medir distancia lateral y comparar con el lado izquierdo
+TRIG_F – ECHO_F	Frontal	Evitar choques frontales
+Estos sensores permiten al vehículo “ver” alrededor y tomar decisiones autónomas basadas en distancias medidas en tiempo real.
+
+Cómo se procesan los sentidos
+La función leerDistancia(trig, echo) emite un pulso y mide el tiempo de retorno para calcular la distancia.
+Incluye un filtro que:
+•	Reemplaza valores fuera de rango (>300 cm)
+•	Evita lecturas erróneas de 0 cm
+Así el robot no se detiene innecesariamente.
+
+⛧ Pines del motor L298N (potencia)
+
+const int IN1 = 8;
+const int IN2 = 13;
+const int ENA = 10;
+
+⛧ Configuración del motor
+
+pinMode(IN1, OUTPUT);
+pinMode(IN2, OUTPUT);
+pinMode(ENA, OUTPUT);
+
+⛧ Funciones que controlan la POTENCIA del motor
+
+void motorAdelante(int vel) {
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  analogWrite(ENA, vel);
+}
+
+void motorAtras(int vel) {
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+  analogWrite(ENA, vel);
+}
+
+void motorStop() {
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+  analogWrite(ENA, 0);
+}
+
