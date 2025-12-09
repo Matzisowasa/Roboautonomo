@@ -22,14 +22,19 @@ Procesa las lecturas de los sensores y ejecuta el algoritmo de movimiento autón
 
 ⚙️ GESTIÓN DE MOVILIDAD
 
-La gestión de movilidad del robot se basa en la interacción coordinada entre los sensores ultrasónicos, el driver BTS7960, el motor principal y el servomotor de dirección Ackerman. Este sistema permite que el robot mantenga una trayectoria estable, evite obstáculos y complete las tres vueltas a la pista.
+La movilidad del vehículo se basa en un sistema de dirección Ackerman accionado por un servomotor capaz de desplazarse sobre una pista realizando 3 vueltas completas, utilizando tres sensores ultrasónicos para la detección del entorno, un motor controlado mediante un driver BTS7960, y un conjunto de tracción controlado por un módulo *L298N*. Este apartado describe cómo se gestionan los movimientos, qué componentes se seleccionaron y cómo se integraron en el chasis del vehículo.
 
 🔧 Componentes involucrados
 
-3 sensores ultrasónicos HC-SR04: izquierda, frente y derecha.
-1 servomotor MG996R para la dirección Ackerman.
-1 motor DC de tracción controlado por el driver BTS7960.
-Sistema de control basado en Arduino.
+•	Arduino (UNO/Nano/Mega).
+•	Servomotor MG996R (dirección Ackerman).
+•	Driver BTS7960 (control del motor principal).
+•	3 sensores ultrasónicos HC-SR04 (izquierdo, frontal y derecho).
+•	Motor DC de tracción.
+•	Chasis de vehículo.
+•	Batería.
+•	Chasis hecho en SolidWorks impreso en PLA.
+
 
 🧠 Lógica de movilidad
 
