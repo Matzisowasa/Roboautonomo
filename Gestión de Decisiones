@@ -1,0 +1,5 @@
+⛧ Lógica para detectar obstáculos y decidir movimiento
+
+if (distF < MIN_DISTF) { ... }
+
+if ((distI < 20) || (distD < 20)) { ... }
