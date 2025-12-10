@@ -7,7 +7,7 @@ const int IN1 = 8;
 const int IN2 = 13;
 const int ENA = 10;
 
-// Ultrasonidos izquierda y derecha (LOS TUYOS)
+// Ultrasonicos izquierda y derecha 
 const int TRIG_I = 7;
 const int ECHO_I = 6;
 
@@ -50,7 +50,7 @@ void setup() {
   pinMode(TRIG_F, OUTPUT);
   pinMode(ECHO_F, INPUT);
 
-  Serial.println("Auto ESP32 con 3 ultrasonidos listo!");
+  Serial.println("Auto ESP32 con 3 ultrasonicos listo!");
 }
 
 // ----------------------------------------------
